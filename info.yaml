@@ -6,6 +6,5 @@ mainScript: install.py
 version: '1.2'
 addToMenu: []
 html: true
-timeStamp: 1351798925.829544
 requiresVersionMajor: '1'
 requiresVersionMinor: '7'
