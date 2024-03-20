@@ -1,0 +1,10 @@
+name: Arrange Windows
+developer: TypeMyType
+developerURL: http://www.typemytype.com
+launchAtStartUp: true
+mainScript: install.py
+version: '1.2'
+addToMenu: []
+html: true
+requiresVersionMajor: '1'
+requiresVersionMinor: '7'
