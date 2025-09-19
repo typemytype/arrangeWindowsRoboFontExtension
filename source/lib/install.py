@@ -1,4 +1,4 @@
-from AppKit import *
+import AppKit
 from lib.doodleMenus import BaseMenu
 from tile import tile
 from cascade import cascade
@@ -8,7 +8,7 @@ class ArrangeWindows(object):
 
     def __init__(self):
 
-        menuBar = NSApp().mainMenu()
+        menuBar = AppKit.NSApp().mainMenu()
 
         windowMenu = menuBar.itemWithTitle_("Window")
 
@@ -19,7 +19,7 @@ class ArrangeWindows(object):
         menuItems = [
             ("Tile", self.tileCallback),
             ("Cascade", self.cascadeCallback)
-            ]
+        ]
         for title, callback in menuItems:
             if menu.itemWithTitle_(title):
                 return
@@ -31,5 +31,6 @@ class ArrangeWindows(object):
 
     def cascadeCallback(self, sender):
         cascade()
+
 
 ArrangeWindows()

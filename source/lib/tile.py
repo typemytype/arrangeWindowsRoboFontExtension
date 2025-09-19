@@ -1,18 +1,18 @@
 # tile windows
 
-from AppKit import *
+import AppKit
 
 
 def tile():
 
-    windows = [w for w in NSApp().orderedWindows() if w.isVisible()]
+    windows = [w for w in AppKit.NSApp().orderedWindows() if w.isVisible()]
 
-    screen = NSScreen.mainScreen()
+    screen = AppKit.NSScreen.mainScreen()
     (x, y), (w, h) = screen.visibleFrame()
 
-    altDown = NSEvent.modifierFlags() & NSAlternateKeyMask
+    altDown = AppKit.NSEvent.modifierFlags() & AppKit.NSAlternateKeyMask
 
-    NSApp().arrangeInFront_(None)
+    AppKit.NSApp().arrangeInFront_(None)
 
     prefWindow = None
     for window in windows:
@@ -30,18 +30,18 @@ def tile():
             break
 
     if scriptingWindow is not None:
-        scriptinWindowWidth = w/5.
+        scriptinWindowWidth = w / 5.
         w -= scriptinWindowWidth
-        scriptingWindow.setFrame_display_animate_(NSMakeRect(x+w, y, scriptinWindowWidth, h), True,  altDown)
+        scriptingWindow.setFrame_display_animate_(AppKit.NSMakeRect(x + w, y, scriptinWindowWidth, h), True, altDown)
         windows.remove(scriptingWindow)
 
     tileInfo = {
-                1 : [[1]],
-                2 : [[1], [1]],
-                3 : [[1], [1, 1]],
-                4 : [[1, 1], [1, 1]],
-                5 : [[1, 1], [1, 1, 1]],
-                }
+        1: [[1]],
+        2: [[1], [1]],
+        3: [[1], [1, 1]],
+        4: [[1, 1], [1, 1]],
+        5: [[1, 1], [1, 1, 1]],
+    }
 
     windowsToTile = windows[:5]
     windowsToHide = windows[5:]
@@ -53,15 +53,15 @@ def tile():
         diffy = y
         c = 0
         for i in arrangement:
-            maxWidth = len(i)        
+            maxWidth = len(i)
             for j in i:
                 window = windows[c]
-                window.setFrame_display_animate_(NSMakeRect(diffx, diffy, w/float(maxWidth), h/float(maxHeight)), True, altDown)
+                window.setFrame_display_animate_(AppKit.NSMakeRect(diffx, diffy, w / float(maxWidth), h / float(maxHeight)), True, altDown)
                 c += 1
-            
-                diffx += w/float(maxWidth)
+
+                diffx += w / float(maxWidth)
             diffx = x
-            diffy += h/float(maxHeight)
+            diffy += h / float(maxHeight)
 
     for window in windowsToHide:
         window.miniaturize_(None)
